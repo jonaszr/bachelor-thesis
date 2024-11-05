@@ -1,0 +1,18 @@
+- `libioSnyk.flatten`
+  - gets data from the following collection and saves the flattened version in `mongo.libioVuln`
+    - `mongo.vulnUrls`
+    - `mongo.patchUrls`
+    - `mongo.patchCommitsLibio`
+    - `mongo.libioExport`
+    - `mongo.vulnUrlDetails`
+- `libioSnyk.filterMatches`
+  - removes records from `mongo.libioVuln` if vulnerable classes are not found in corresponding jar
+- `mvnEco.filterMatches`
+  - removes records from `mongo.mvnEcoVuln` if vulnerable classes are not found in corresponding jar
+- `merge`
+  - merges data from `mongo.libioVuln` and `mongo.mvnEcoVuln`
+  - saves into `mongo.mergedVuln`
+- `merge.clients`
+  - gets the clients of `mongo.mergedVuln` from `mongo.libioExport` and `<mvn_eco>/csv/DEP.csv`
+  - downloads the jars of the clients into `interim/jars`
+
