@@ -2,3 +2,4 @@
 .idea
 /classgraph
 /dagP
+.gradle
