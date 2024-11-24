@@ -31,7 +31,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.squareup.moshi:moshi:1.15.1")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
-    implementation("io.github.classgraph:classgraph:4.8.166-SNAPSHOT")
+    implementation("classpath/classgraph:4.8.166-SNAPSHOT.jar")
 
     implementation("org.apache.commons:commons-compress:1.27.1")
     implementation("org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r")
