@@ -1,0 +1,5 @@
+python-dotenv
+GitPython
+pandas
+pydriller==2.6
+pymongo
