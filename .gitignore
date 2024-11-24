@@ -5,3 +5,4 @@
 .gradle
 .log
 /MavenEcoSysResearch
+.ipynb_checkpoints

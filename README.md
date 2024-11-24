@@ -24,3 +24,12 @@ To start:
 - For more details on data collection, data cleaning and answering the RQs refer to the notebooks under `src/dependencyAnalysis/src/main/notebooks`
 - Please read any code before running it. Most likely you need to do small modifications to get what you need.
 
+Set values in projects .env
+
+docker-compose
+  -mongo
+    - Running on port 42692
+  -mongo_express
+    - Running on port 8081
+    - http://0.0.0.0:8081
+    - credentials: admin:pass
