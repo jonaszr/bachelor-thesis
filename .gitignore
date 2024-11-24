@@ -6,5 +6,4 @@
 .log
 /MavenEcoSysResearch
 .ipynb_checkpoints
-.env
 LOG_DIR_IS_UNDEFINED
