@@ -1,0 +1,39 @@
+volumes:
+  mongo_data:
+    driver_opts:
+      type: "local"
+      device: "${PWD}/data/db"
+      o: "bind"
+  mongo_export:
+    driver_opts:
+      type: "local"
+      device: "${PWD}/data/mongo_export"
+      o: "bind"
+
+networks:
+  default:
+
+
+services:
+  mongo:
+    image: mongo:8.0.3
+    volumes:
+      - mongo_data:/data/db
+      - mongo_export:/mongo_export
+    ports:
+      - "42692:27017"
+    networks:
+      - default
+    restart: always
+
+  mongo_express:
+    image: mongo-express:1.0.2-20
+    ports:
+      - "8081:8081"
+    networks:
+      - default
+    depends_on:
+      - mongo
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017
