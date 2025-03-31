@@ -1,5 +1,4 @@
 #!/bin/bash
-# call inside mongo container
 
 # Import JSON metadata files
 for file in *.json; do

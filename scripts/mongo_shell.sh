@@ -2,4 +2,4 @@
 
 # Open a shell inside the mongo container
 cd ..
-docker-compose exec mongo /bin/bash
+docker exec -it mongo_2 /bin/bash
