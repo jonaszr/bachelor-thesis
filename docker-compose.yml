@@ -16,6 +16,7 @@ networks:
 
 services:
   mongo:
+    container_name: mongo_2
     image: mongo:8.0.3
     volumes:
       - mongo_data:/data/db
@@ -27,6 +28,7 @@ services:
     restart: always
 
   mongo_express:
+    container_name: mongo-express_2
     image: mongo-express:1.0.2-20
     ports:
       - "8081:8081"
