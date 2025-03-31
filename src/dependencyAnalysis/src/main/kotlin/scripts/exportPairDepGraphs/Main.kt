@@ -23,6 +23,7 @@ import java.io.FileNotFoundException
 import java.net.URLClassLoader
 import java.nio.file.Paths
 import kotlin.time.measureTime
+import java.io.FileOutputStream
 
 class Main
 
@@ -67,7 +68,7 @@ fun loadJarIntoClassPath(jar: File): URLClassLoader =
 fun loadJarsIntoClassPath(vararg jars: File): URLClassLoader =
     URLClassLoader(jars.map { it.toURI().toURL() }.toTypedArray())
 
-val dispatcher = Dispatchers.IO.limitedParallelism(16)
+val dispatcher = Dispatchers.IO.limitedParallelism(10)
 
 fun saveCaches() =
     runBlocking {
@@ -120,59 +121,59 @@ fun saveCaches() =
                     // not accurate (i.e., there are some classes that are actually outer class but are marked as
                     // inner class by ClassGraph)
                     // val allOuterClasses = classes.filterNot { it.isInnerClass }.toSet() // buggy! TODO: report
-                    // val allOuterClasses = classes.filter { jGraph.vertexSet().contains(it.name) }.toSet()
+                    val allOuterClasses = classes.filter { jGraph.vertexSet().contains(it.name) }.toSet()
 
-                    // dataDir
-                    //     .resolve("interim/depGraphCache.pairs")
-                    //     .also { it.mkdirs() }
-                    //     .resolve("$depGav#$clientGav.vertices.tsv.zip")
-                    //     .let { outFile ->
-                    //         allOuterClasses.joinToString("\n") { v ->
-                    //             "${v.name}\t${v.modifiers}"
-                    //         }.byteInputStream().use { inStream ->
-                    //             FileOutputStream(outFile).use { outFile ->
-                    //                 CompressorStreamFactory()
-                    //                     .createCompressorOutputStream(CompressorStreamFactory.DEFLATE, outFile)
-                    //                     .use { zipOut ->
-                    //                         inStream.copyTo(zipOut)
-                    //                     }
-                    //             }
-                    //         }
-                    //     }
-                    //
-                    // dataDir
-                    //     .resolve("interim/depGraphCache.pairs")
-                    //     .also { it.mkdirs() }
-                    //     .resolve("$depGav#$clientGav.edges.tsv.zip")
-                    //     .let { outFile ->
-                    //         jGraph.edgeSet().joinToString("\n") { e ->
-                    //             "${jGraph.getEdgeSource(e)}\t${jGraph.getEdgeTarget(e)}"
-                    //         }.byteInputStream().use { inStream ->
-                    //             FileOutputStream(outFile).use { outFile ->
-                    //                 CompressorStreamFactory()
-                    //                     .createCompressorOutputStream(CompressorStreamFactory.DEFLATE, outFile)
-                    //                     .use { zipOut ->
-                    //                         inStream.copyTo(zipOut)
-                    //                     }
-                    //             }
-                    //         }
-                    //     }
-                    //
-                    // dataDir
-                    //     .resolve("interim/jarClassInfoCache")
-                    //     .also { it.mkdirs() }
-                    //     .resolve("$depGav#$clientGav.classInfo.json.zip")
-                    //     .let { outFile ->
-                    //         scanResultAsJson.byteInputStream().use { inStream ->
-                    //             FileOutputStream(outFile).use { outFile ->
-                    //                 CompressorStreamFactory()
-                    //                     .createCompressorOutputStream(CompressorStreamFactory.DEFLATE, outFile)
-                    //                     .use { zipOut ->
-                    //                         inStream.copyTo(zipOut)
-                    //                     }
-                    //             }
-                    //         }
-                    //     }
+                     dataDir
+                         .resolve("interim/depGraphCache.pairs")
+                         .also { it.mkdirs() }
+                         .resolve("$depGav#$clientGav.vertices.tsv.zip")
+                         .let { outFile ->
+                             allOuterClasses.joinToString("\n") { v ->
+                                 "${v.name}\t${v.modifiers}"
+                             }.byteInputStream().use { inStream ->
+                                 FileOutputStream(outFile).use { outFile ->
+                                     CompressorStreamFactory()
+                                         .createCompressorOutputStream(CompressorStreamFactory.DEFLATE, outFile)
+                                         .use { zipOut ->
+                                             inStream.copyTo(zipOut)
+                                         }
+                                 }
+                             }
+                         }
+
+                     dataDir
+                         .resolve("interim/depGraphCache.pairs")
+                         .also { it.mkdirs() }
+                         .resolve("$depGav#$clientGav.edges.tsv.zip")
+                         .let { outFile ->
+                             jGraph.edgeSet().joinToString("\n") { e ->
+                                 "${jGraph.getEdgeSource(e)}\t${jGraph.getEdgeTarget(e)}"
+                             }.byteInputStream().use { inStream ->
+                                 FileOutputStream(outFile).use { outFile ->
+                                     CompressorStreamFactory()
+                                         .createCompressorOutputStream(CompressorStreamFactory.DEFLATE, outFile)
+                                         .use { zipOut ->
+                                             inStream.copyTo(zipOut)
+                                         }
+                                 }
+                             }
+                         }
+
+                     dataDir
+                         .resolve("interim/jarClassInfoCache")
+                         .also { it.mkdirs() }
+                         .resolve("$depGav#$clientGav.classInfo.json.zip")
+                         .let { outFile ->
+                             scanResultAsJson.byteInputStream().use { inStream ->
+                                 FileOutputStream(outFile).use { outFile ->
+                                     CompressorStreamFactory()
+                                         .createCompressorOutputStream(CompressorStreamFactory.DEFLATE, outFile)
+                                         .use { zipOut ->
+                                             inStream.copyTo(zipOut)
+                                         }
+                                 }
+                             }
+                         }
                 }
             }.toList().awaitAll()
         }
@@ -286,7 +287,7 @@ fun main() {
     println(vulnGavPairs.toSet().size)
 
     val t = measureTime {
-        // saveCaches()
+        saveCaches()
         checkCaches()
     }
 
