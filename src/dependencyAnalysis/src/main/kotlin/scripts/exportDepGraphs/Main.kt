@@ -58,7 +58,7 @@ private fun gavToJarUrl(packageGAV: String): String {
 
 private val gavToJar = vulnGavToClasses.map {
     val jarPath = jarsDir.resolve(gavToJarUrl(it.key))
-    if (!jarPath.isFile()) throw Exception("jar file not found")
+    if (!jarPath.isFile()) throw Exception(jarPath.name + " jar file not found")
 
     it.key to jarPath
 }.toMap()
@@ -114,7 +114,7 @@ private fun getDepGraphInfo(jarFile: File) =
             }
     }
 
-private fun saveDepGraphInfo(
+private fun  saveDepGraphInfo(
     classes: ClassInfoList,
     jGraph: DefaultGraph,
     gav: String?,
@@ -381,6 +381,6 @@ private fun checkCaches() {
 
 private fun main() {
     println(gavToJar.size)
-    // saveCaches()
-    // checkCaches()
+    saveCaches()
+    checkCaches()
 }
