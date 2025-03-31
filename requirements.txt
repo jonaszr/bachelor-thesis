@@ -1,5 +1,5 @@
 python-dotenv
 GitPython
 pandas
-pydriller==2.6
+pydriller==2.7
 pymongo
