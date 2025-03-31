@@ -177,8 +177,8 @@ fun main() {
     
     println("it took ${t.inWholeMilliseconds} ms")
     
-    // println(vulnGavs.size)
-    // println(gavToSccFile.size)
+    println(vulnGavs.size)
+    println(gavToSccFile.size)
     
-    // loadAllDagpPartitionInfo()
+    loadAllDagpPartitionInfo()
 }
