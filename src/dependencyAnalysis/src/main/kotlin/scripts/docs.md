@@ -12,8 +12,8 @@
 
 - `exportPairDepGraphs`
     - computes the dependency graph of pairs of <dep, client> from `mongo.mergedVulnClients`
-    - saves vertices to `interim/depGraphCache.pairs/<depGav>#<clientGav>.vertices.tsv.zip`
-    - saves edges to `interim/depGraphCache.pairs/<depGav>#<clientGav>.edges.tsv.zip`
+    - saves vertices to `interimdepGraphCache.pairs/<depGav>#<clientGav>.vertices.tsv.zip`
+    - saves edges to `interim/depGraphCache.pairs/<depGav>#<clientGav>.edges.tsv.zip`/
     - saves classInfo (json) to `interim/depGraphCache.pairs/<depGav>#<clientGav>.classInfo.json.zip`
 
 - `partitionDepGraph.dagP`
