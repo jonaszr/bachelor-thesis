@@ -32,6 +32,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.15.1")
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
     implementation(files("../../classgraph/target/classgraph-4.8.166-SNAPSHOT.jar"))
+    implementation("io.exoquery:pprint-kotlin:2.0.2")
 
     implementation("org.apache.commons:commons-compress:1.27.1")
     implementation("org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r")
