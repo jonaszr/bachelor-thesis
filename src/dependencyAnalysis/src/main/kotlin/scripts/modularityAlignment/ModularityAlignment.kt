@@ -442,7 +442,7 @@ private class PostAnalysis(analysis: Analysis) {
 }
 
 private fun main() {
-    val loadFromCache = true
+    val loadFromCache = false
     
     val analysis = Analysis(loadFromCache)
     val postAnalysis = PostAnalysis(analysis)
