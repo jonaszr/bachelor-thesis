@@ -26,7 +26,7 @@ match_keys = {
     "mergedVulnClients": ["cve", "dep_gav", "client_gav"],
     "mvnEcoVuln": ["cve_ref", "vuln_gav"],
     "packageVulnData": ["uuid"],
-    "patchCommitsLibio": ["repo", "commitHash", "modifiedClass", "modifiedFilePathAfter", "changedMethods"],
+    "patchCommitsLibio": ["repo", "commitHash", "modifiedFilePathAfter", "snykPatchUrl"],
     "patchUrls": ["VulnUrl"],
     "vulnUrlDetails": ["VulnUrl"],
     "vulnUrls": ["DependencyName", "DependencyVersion"],
