@@ -50,7 +50,7 @@ def scrape_snyk_maven_vulnerabilities():
                         'a', string="GitHub Commit")]
 
                     vuln_data.append({
-                        "VulnID": vuln_id,
+                        "VulnUrl": vuln_id,
                         "PatchUrls": patch_urls
                     })
 
