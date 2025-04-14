@@ -3,3 +3,4 @@ GitPython
 pandas
 pydriller==2.6
 pymongo
+lizard==1.17.10
